@@ -11,9 +11,6 @@ public class Match {
 	
 	
 	public Match(UserThread p1, UserThread p2) {
-		
-	}
-	public static void main(String[] args) {
-		
+		//p
 	}
 }
