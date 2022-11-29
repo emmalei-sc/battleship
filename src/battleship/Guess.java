@@ -1,26 +1,19 @@
 package battleship;
 
-enum GuessState 
-{
-	HIT,
-	MISS,
-	NONE
-}
-
 public class Guess extends Position {
 	
-	GuessState state = GuessState.NONE;
+	boolean hit = false;
 
 	public Guess(int x, int y) {
 		super(x, y);
 	}
 	
 	// Match will detect if the guess hit or missed a ship
-	public void setState(GuessState state) {
-		this.state = state;
+	public void setHitState(boolean hit) {
+		this.hit = hit;
 	}
 	
-	public GuessState getState() {
-		return state;
+	public boolean getHitState() {
+		return hit;
 	}
 }
