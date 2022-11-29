@@ -2,18 +2,21 @@ package battleship;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import javax.servlet.http.HttpServlet;
+
 import java.net.*;
 import java.util.*;
 import java.io.*;
 
 //The main class for the backend
-public class Server extends Thread {
+public class Server extends HttpServlet {
 // Should this be a servlet instead?
 	
 	Queue<UserThread> users;
 	public Server(int port) {
 		users = new LinkedList<>();
-		this.start();
+		this.run();
 		Match m;
 		while (true) {
 			if (users.size() >= 2) {
