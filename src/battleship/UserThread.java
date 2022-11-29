@@ -1,7 +1,12 @@
 package battleship;
 
-public class UserThread {
+public class UserThread extends Thread{
 	public UserThread() {
+		
+	}
+	
+	public void run()
+	{
 		
 	}
 }
