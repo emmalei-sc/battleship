@@ -12,6 +12,10 @@ import java.io.*;
 
 //The main class for the backend
 public class Server extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8370850669362836525L;
 	ServerSocket server;
 	Socket socket;
 	Queue<UserThread> users;

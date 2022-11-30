@@ -29,6 +29,13 @@ public class UserThread extends Thread{
 		this.shipsLost = shipsLost;
 	}
 	
+	public UserThread(String username, String pw, int wins, int losses) {
+		this.username = username;
+		this.password = pw;
+		this.wins = wins;
+		this.losses = losses;
+	}
+	
 	public void addShipsSunk(int sunk) {
 		shipsSunk += sunk;
 	}
