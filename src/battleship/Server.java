@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.sql.*;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import java.net.*;
@@ -11,6 +12,7 @@ import java.util.*;
 import java.io.*;
 
 //The main class for the backend
+@WebServlet("/Server")
 public class Server extends HttpServlet {
 	/**
 	 * 
@@ -22,7 +24,6 @@ public class Server extends HttpServlet {
 	boolean isMatchRunning = false;
 	public Server(int port) {
 		users = new LinkedList<>();
-		Match m;
 		try {
 			server = new ServerSocket(port);
 			while (true) {
@@ -33,8 +34,8 @@ public class Server extends HttpServlet {
 				UserThread newUser = new UserThread(); //TODO
 				users.add(newUser);
 				if (!isMatchRunning && users.size() >= 2) {
-					m = new Match(users.remove(), users.remove());
 					isMatchRunning = true;
+					new Match(users.remove(), users.remove());
 				}
 				//update database
 			}
