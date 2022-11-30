@@ -9,8 +9,9 @@ public class Ship {
 	private List<Position> tiles;
 	
 	boolean alive;
-//	boolean orientation; // 0 - vertical, 1 - horizontal
+	boolean orientation; // 0 - vertical, 1 - horizontal
 	private int length;
+	private int health;
 	
 	public Ship() {
 		tiles = new ArrayList<Position>();
@@ -26,7 +27,9 @@ public class Ship {
 	}
 	
 	public void hitShip() {
-		alive = false;
+		health--;
+		if (health <= 0)
+			alive = false;
 	}
 	
 	public boolean isAlive() {

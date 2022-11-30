@@ -28,8 +28,18 @@ public class UserThread extends Thread{
 		this.shipsLost = shipsLost;
 	}
 	
+	public void setShipsSunk(int sunk) {
+		shipsSunk = sunk;
+	}
+	
+	public void setShipsLost(int lost) {
+		shipsLost = lost;
+	}
+	
 	public void run()
 	{
-		
+		while (true) {
+			// Might have to catch a message to indicate when it's this player's turn?
+		}
 	}
 }
