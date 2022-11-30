@@ -19,11 +19,12 @@ public class UserThread extends Thread{
 		this.password = password;
 	}
 	
-	public UserThread(String username, String pw, int wins, int losses, int shipsSunk, int shipsLost) {
+	public UserThread(String username, String pw, int wins, int losses, int ties, int shipsSunk, int shipsLost) {
 		this.username = username;
 		this.password = password;
 		this.wins = wins;
 		this.losses = losses;
+		this.ties = ties;
 		this.shipsSunk = shipsSunk;
 		this.shipsLost = shipsLost;
 	}
@@ -42,6 +43,10 @@ public class UserThread extends Thread{
 	
 	public void addLoss() {
 		losses++;
+	}
+	
+	public void addTie() {
+		ties++;
 	}
 	
 	public void run()

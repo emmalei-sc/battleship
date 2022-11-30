@@ -95,6 +95,11 @@ public class MatchCopy {
 			user2.addWin();
 			user1.addLoss();
 		}
+		else if (result == 0) 
+		{
+			user1.addTie();
+			user2.addTie();
+		}
 		
 		// -------- Ship Stats ----------
 		// Player 1
