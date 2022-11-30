@@ -30,6 +30,7 @@ public class MatchCopy {
 	private Player p1;
 	private Player p2;
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private int result = 0;
 	
 	public MatchCopy(UserThread u1, UserThread u2) {
 		this.user1 = u1;
@@ -43,7 +44,7 @@ public class MatchCopy {
 	//returns 1 if player 1 wins, 2 if player 2 wins
 	public int startMatch() {
 		placeShips();
-		int result = battle();
+		result = battle();
 		updateStats();
 		return result;
 	}
@@ -81,7 +82,21 @@ public class MatchCopy {
 		return 0;
 	}
 	
-	public void updateStats() {
+	public void updateStats() 
+	{
+		// -------- Win Stats ----------
+		if (result == 1)
+		{
+			user1.addWin();
+			user2.addLoss();
+		}
+		else if (result == 2)
+		{
+			user2.addWin();
+			user1.addLoss();
+		}
+		
+		// -------- Ship Stats ----------
 		// Player 1
 		int p1ShipsSunk = 0;
 		// Calculate how many of player TWO's ships died
@@ -89,8 +104,8 @@ public class MatchCopy {
 			if (!ship.isAlive())
 				p1ShipsSunk++;
 		}
-		user1.setShipsSunk(p1ShipsSunk);
-		user2.setShipsLost(p1ShipsSunk);
+		user1.addShipsSunk(p1ShipsSunk);
+		user2.addShipsLost(p1ShipsSunk);
 		
 		// Player 2
 		int p2ShipsSunk = 0;
@@ -99,7 +114,7 @@ public class MatchCopy {
 			if (!ship.isAlive())
 				p2ShipsSunk++;
 		}
-		user2.setShipsSunk(p2ShipsSunk);
-		user1.setShipsLost(p2ShipsSunk);
+		user2.addShipsSunk(p2ShipsSunk);
+		user1.addShipsLost(p2ShipsSunk);
 	}
 }

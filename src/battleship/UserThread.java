@@ -28,12 +28,20 @@ public class UserThread extends Thread{
 		this.shipsLost = shipsLost;
 	}
 	
-	public void setShipsSunk(int sunk) {
-		shipsSunk = sunk;
+	public void addShipsSunk(int sunk) {
+		shipsSunk += sunk;
 	}
 	
-	public void setShipsLost(int lost) {
-		shipsLost = lost;
+	public void addShipsLost(int lost) {
+		shipsLost += lost;
+	}
+	
+	public void addWin() {
+		wins++;
+	}
+	
+	public void addLoss() {
+		losses++;
 	}
 	
 	public void run()
