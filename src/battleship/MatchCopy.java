@@ -12,8 +12,10 @@ public class MatchCopy {
 	// Class to contain each player's ships and hits
 	class Player {
 		
-		// Five ships per player
-		Ship[] ships = new Ship[5];
+		// 8 ships per player
+		// 1 5-squares, 1 4-squares, 1 3-squares, 2 2-squares, 3 1-squares
+		Ship[] ships = new Ship[8];
+		ArrayList<Integer> shipLengths = new ArrayList<Integer>();
 		
 		// Grid of ship locations
 		boolean[][] shipLocations = new boolean[GRID_LENGTH][GRID_LENGTH];
@@ -21,7 +23,31 @@ public class MatchCopy {
 		int[][] hitLocations = new int[GRID_LENGTH][GRID_LENGTH];
 		
 		public Player() {
-			
+			// Init ship lengths
+			shipLengths.add(5);
+			shipLengths.add(4);
+			shipLengths.add(3);
+			shipLengths.add(2);
+			shipLengths.add(2);
+			shipLengths.add(1);
+			shipLengths.add(1);
+			shipLengths.add(1);
+			for (int i=0; i<ships.length; i++) {
+				ships[i] = new Ship();
+				ships[i].setShipLength(shipLengths.get(i));
+			}
+			// Initialize ship locations to false
+			for (int r=0; r<shipLocations.length; r++) {
+				for (int c=0; c<shipLocations[r].length; c++) {
+					shipLocations[r][c] = false;
+				}
+			}
+			// init hit locations to none
+			for (int r=0; r<hitLocations.length; r++) {
+				for (int c=0; c<hitLocations[r].length; c++) {
+					hitLocations[r][c] = 0;
+				}
+			}
 		}
 	}
 	
@@ -49,9 +75,13 @@ public class MatchCopy {
 		return result;
 	}
 	private void placeShips() {
+		
+		// hard assign ships
+		
 		//randomly assign ships
+		
 		for (Ship ship : p1.ships) {
-			int length = ThreadLocalRandom.current().nextInt(SHIP_MIN_LENGTH, SHIP_MAX_LENGTH+1);
+//			int length = ThreadLocalRandom.current().nextInt(SHIP_MIN_LENGTH, SHIP_MAX_LENGTH+1);
 			boolean orientation = ThreadLocalRandom.current().nextBoolean();
 			int startX;
 			int startY;
@@ -60,10 +90,14 @@ public class MatchCopy {
 			do {
 				startX = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
 				startY = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
-				if (orientation == false) // vertical
+				if (p1.shipLocations[startX][startY] == true)
 				{
 					
-				} else 
+				}
+				if (orientation == false) // vertical
+				{
+//					if (startX + ship.getShipLength() > GRID_LENGTH)
+				} else // horizontal
 				{
 					
 				}

@@ -38,6 +38,7 @@ public class Ship {
 	
 	public void setShipLength(int len) {
 		length = len;
+		health = length;
 	}
 	
 	public int getShipLength() {
