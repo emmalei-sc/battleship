@@ -56,6 +56,10 @@ public class UserThread extends Thread{
 		ties++;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	
 	public void run()
 	{
 		while (true) {

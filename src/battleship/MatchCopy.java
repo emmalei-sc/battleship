@@ -5,9 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MatchCopy {
 	
-	static final int GRID_LENGTH = 11;
-	static final int SHIP_MAX_LENGTH = 5;
-	static final int SHIP_MIN_LENGTH = 2;
+	private static final int GRID_LENGTH = 11;
 	
 	// Class to contain each player's ships and hits
 	class Player {
@@ -78,33 +76,35 @@ public class MatchCopy {
 		
 		// hard assign ships
 		
+		
+		
 		//randomly assign ships
 		
-		for (Ship ship : p1.ships) {
-//			int length = ThreadLocalRandom.current().nextInt(SHIP_MIN_LENGTH, SHIP_MAX_LENGTH+1);
-			boolean orientation = ThreadLocalRandom.current().nextBoolean();
-			int startX;
-			int startY;
-			
-			boolean valid = false;
-			do {
-				startX = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
-				startY = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
-				if (p1.shipLocations[startX][startY] == true)
-				{
-					
-				}
-				if (orientation == false) // vertical
-				{
-//					if (startX + ship.getShipLength() > GRID_LENGTH)
-				} else // horizontal
-				{
-					
-				}
-				
-			} while (!valid);
-			
-		}
+//		for (Ship ship : p1.ships) {
+////			int length = ThreadLocalRandom.current().nextInt(SHIP_MIN_LENGTH, SHIP_MAX_LENGTH+1);
+//			boolean orientation = ThreadLocalRandom.current().nextBoolean();
+//			int startX;
+//			int startY;
+//			
+//			boolean valid = false;
+//			do {
+//				startX = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
+//				startY = ThreadLocalRandom.current().nextInt(GRID_LENGTH+1);
+//				if (p1.shipLocations[startX][startY] == true)
+//				{
+//					
+//				}
+//				if (orientation == false) // vertical
+//				{
+////					if (startX + ship.getShipLength() > GRID_LENGTH)
+//				} else // horizontal
+//				{
+//					
+//				}
+//				
+//			} while (!valid);
+//			
+//		}
 	}
 	
 	private int battle() {
@@ -116,23 +116,50 @@ public class MatchCopy {
 		return 0;
 	}
 	
+	public int makeGuess(int x, int y, String username) {
+		Player current;
+		Player other;
+		if (user1.getUsername().equals(username)) {
+			current = p1;
+			other = p2;
+		} else {
+			current = p2;
+			other = p1;
+		}
+		
+		if (other.shipLocations[x][y] == true) { 
+			current.hitLocations[x][y] = 2; // hit
+		} else {
+			current.hitLocations[x][y] = 1; // miss
+		}
+		return current.hitLocations[x][y];
+	}
+	
 	public void updateStats() 
 	{
 		// -------- Win Stats ----------
+		// String winner = "";
+		// String loser = "";
+		// boolean tie = false;
 		if (result == 1)
 		{
 			user1.addWin();
 			user2.addLoss();
+			// winner = user1.getUsername();
+			// loser = user2.getUsername();
 		}
 		else if (result == 2)
 		{
 			user2.addWin();
 			user1.addLoss();
+			// winner = user2.getUsername();
+			// loser = user1.getUsername();
 		}
 		else if (result == 0) 
 		{
 			user1.addTie();
 			user2.addTie();
+			// tie = true;
 		}
 		
 		// -------- Ship Stats ----------
@@ -155,5 +182,10 @@ public class MatchCopy {
 		}
 		user2.addShipsSunk(p2ShipsSunk);
 		user1.addShipsLost(p2ShipsSunk);
+		
+		// Using Database team's function
+		// Object ob = new Object();
+		// ob.updateStats(winner, loser, tie, shipsHit, shipsLost);
+		// uhhhh one call per player?
 	}
 }

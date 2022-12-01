@@ -44,4 +44,8 @@ public class Ship {
 	public int getShipLength() {
 		return length;
 	}
+	
+	public void setOrientation(boolean orient) {
+		orientation = orient;
+	}
 }
